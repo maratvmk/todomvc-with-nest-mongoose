@@ -1,15 +1,167 @@
 {
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1,
-  "newProjectRoot": "",
-  "projects": {},
-  "cli": {
-    "warnings": {
-      "typescriptMismatch": false,
-      "versionMismatch": false
+    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+    "version": 1,
+    "newProjectRoot": "",
+    "projects": {
+        "todomvc": {
+            "root": "apps/todomvc/",
+            "sourceRoot": "apps/todomvc/src",
+            "projectType": "application",
+            "prefix": "ng-console",
+            "schematics": {
+                "@nrwl/schematics:component": {
+                    "styleext": "scss"
+                }
+            },
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist/apps/todomvc",
+                        "index": "apps/todomvc/src/index.html",
+                        "main": "apps/todomvc/src/main.ts",
+                        "polyfills": "apps/todomvc/src/polyfills.ts",
+                        "tsConfig": "apps/todomvc/tsconfig.app.json",
+                        "assets": [
+                            "apps/todomvc/src/favicon.ico",
+                            "apps/todomvc/src/assets"
+                        ],
+                        "styles": [
+                            "apps/todomvc/src/styles.scss"
+                        ],
+                        "scripts": []
+                    },
+                    "configurations": {
+                        "production": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "apps/todomvc/src/environments/environment.ts",
+                                    "with": "apps/todomvc/src/environments/environment.prod.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "aot": true,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "2mb",
+                                    "maximumError": "5mb"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "todomvc:build"
+                    },
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "todomvc:build:production"
+                        }
+                    }
+                },
+                "extract-i18n": {
+                    "builder": "@angular-devkit/build-angular:extract-i18n",
+                    "options": {
+                        "browserTarget": "todomvc:build"
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "apps/todomvc/tsconfig.app.json",
+                            "apps/todomvc/tsconfig.spec.json"
+                        ],
+                        "exclude": [
+                            "**/node_modules/**"
+                        ]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/builders:jest",
+                    "options": {
+                        "jestConfig": "apps/todomvc/jest.config.js",
+                        "tsConfig": "apps/todomvc/tsconfig.spec.json",
+                        "setupFile": "apps/todomvc/src/test-setup.ts"
+                    }
+                }
+            }
+        },
+        "nestos": {
+            "root": "apps/nestos",
+            "sourceRoot": "apps/nestos/src",
+            "projectType": "application",
+            "prefix": "nestos",
+            "schematics": {},
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/builders:node-build",
+                    "options": {
+                        "outputPath": "dist/apps/nestos",
+                        "main": "apps/nestos/src/main.ts",
+                        "tsConfig": "apps/nestos/tsconfig.app.json",
+                        "assets": [
+                            "apps/nestos/src/assets"
+                        ]
+                    },
+                    "configurations": {
+                        "production": {
+                            "optimization": true,
+                            "extractLicenses": true,
+                            "fileReplacements": [
+                                {
+                                    "replace": "apps/nestos/src/environments/environment.ts",
+                                    "with": "apps/nestos/src/environments/environment.prod.ts"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@nrwl/builders:node-execute",
+                    "options": {
+                        "buildTarget": "nestos:build"
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "apps/nestos/tsconfig.app.json",
+                            "apps/nestos/tsconfig.spec.json"
+                        ],
+                        "exclude": [
+                            "**/node_modules/**"
+                        ]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/builders:jest",
+                    "options": {
+                        "jestConfig": "apps/nestos/jest.config.js",
+                        "tsConfig": "apps/nestos/tsconfig.spec.json"
+                    }
+                }
+            }
+        }
     },
-    "defaultCollection": "@nrwl/schematics"
-    
-  },
-  "schematics": {}
+    "cli": {
+        "warnings": {
+            "typescriptMismatch": false,
+            "versionMismatch": false
+        },
+        "defaultCollection": "@nrwl/schematics"
+    },
+    "schematics": {},
+    "defaultProject": "todomvc"
 }
