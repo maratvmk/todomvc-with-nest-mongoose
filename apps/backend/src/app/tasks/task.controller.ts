@@ -24,7 +24,7 @@ export class TasksController {
 
     @Get('search')
     async search(@Query() query): Promise<Task[]> {
-        return this.taskService.searchByName(query.title);
+        return this.taskService.searchByName(encodeURIComponent(query.title));
     }
 
     @Delete(':id')
