@@ -97,21 +97,21 @@
                 }
             }
         },
-        "nestos": {
-            "root": "apps/nestos",
-            "sourceRoot": "apps/nestos/src",
+        "backend": {
+            "root": "apps/backend",
+            "sourceRoot": "apps/backend/src",
             "projectType": "application",
-            "prefix": "nestos",
+            "prefix": "backend",
             "schematics": {},
             "architect": {
                 "build": {
                     "builder": "@nrwl/builders:node-build",
                     "options": {
-                        "outputPath": "dist/apps/nestos",
-                        "main": "apps/nestos/src/main.ts",
-                        "tsConfig": "apps/nestos/tsconfig.app.json",
+                        "outputPath": "dist/apps/backend",
+                        "main": "apps/backend/src/main.ts",
+                        "tsConfig": "apps/backend/tsconfig.app.json",
                         "assets": [
-                            "apps/nestos/src/assets"
+                            "apps/backend/src/assets"
                         ]
                     },
                     "configurations": {
@@ -120,8 +120,8 @@
                             "extractLicenses": true,
                             "fileReplacements": [
                                 {
-                                    "replace": "apps/nestos/src/environments/environment.ts",
-                                    "with": "apps/nestos/src/environments/environment.prod.ts"
+                                    "replace": "apps/backend/src/environments/environment.ts",
+                                    "with": "apps/backend/src/environments/environment.prod.ts"
                                 }
                             ]
                         }
@@ -130,15 +130,15 @@
                 "serve": {
                     "builder": "@nrwl/builders:node-execute",
                     "options": {
-                        "buildTarget": "nestos:build"
+                        "buildTarget": "backend:build"
                     }
                 },
                 "lint": {
                     "builder": "@angular-devkit/build-angular:tslint",
                     "options": {
                         "tsConfig": [
-                            "apps/nestos/tsconfig.app.json",
-                            "apps/nestos/tsconfig.spec.json"
+                            "apps/backend/tsconfig.app.json",
+                            "apps/backend/tsconfig.spec.json"
                         ],
                         "exclude": [
                             "**/node_modules/**"
@@ -148,8 +148,8 @@
                 "test": {
                     "builder": "@nrwl/builders:jest",
                     "options": {
-                        "jestConfig": "apps/nestos/jest.config.js",
-                        "tsConfig": "apps/nestos/tsconfig.spec.json"
+                        "jestConfig": "apps/backend/jest.config.js",
+                        "tsConfig": "apps/backend/tsconfig.spec.json"
                     }
                 }
             }
