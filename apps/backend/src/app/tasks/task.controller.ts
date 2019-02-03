@@ -4,7 +4,7 @@ import { Task } from './task.interface';
 import { TasksService } from './task.service';
 
 @Controller('tasks')
-export class CatsController {
+export class TasksController {
     constructor(private readonly taskService: TasksService) { }
 
     @Post()
@@ -18,18 +18,13 @@ export class CatsController {
     }
 
     @Get()
-    async findAll(@Query() query: {age: number}): Promise<Task[]> {
-        return this.taskService.findAll(query.age);
+    async findAll(): Promise<Task[]> {
+        return this.taskService.findAll();
     }
 
     @Get('search')
     async search(@Query() query): Promise<Task[]> {
         return this.taskService.searchByName(query.title);
-    }
-
-    @Get('active')
-    async active(): Promise<Task[]> {
-        return this.taskService.active();
     }
 
     @Delete(':id')

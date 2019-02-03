@@ -8,8 +8,8 @@ export class TasksService {
     constructor(@Inject('TaskModelToken') private readonly taskModel: Model<Task>) { }
 
     async create(taskDto): Promise<Task> {
-        const createdCat = new this.taskModel(taskDto);
-        return await createdCat.save();
+        const createdTask = new this.taskModel(taskDto);
+        return await createdTask.save();
     }
 
     async patch(taskDto): Promise<Task> {
@@ -18,10 +18,7 @@ export class TasksService {
         return await task.save();
     }
 
-    async findAll(age?: number): Promise<Task[]> {
-        if (age >= 0) {
-            return await this.taskModel.find({age: {$gte: age}}).exec();
-        }
+    async findAll(): Promise<Task[]> {
         return await this.taskModel.find().exec();
     }
 
@@ -32,10 +29,6 @@ export class TasksService {
         else {
             return this.findAll();
         }
-    }
-
-    async active(): Promise<Task[]> {
-        return await this.taskModel.find({complete: false}).exec();
     }
 
     async findOne(id: string): Promise<Task> {
