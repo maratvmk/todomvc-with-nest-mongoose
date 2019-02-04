@@ -13,6 +13,9 @@
     },
     "backend": {
       "tags": []
+    },
+    "hapi": {
+      "tags": []
     }
   }
 }
