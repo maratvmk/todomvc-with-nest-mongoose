@@ -12,8 +12,8 @@ export class TaskService {
     }
 
     async create(task) {
-        const kitty = new TaskModel(task);
-        return await kitty.save();
+        const t = new TaskModel(task);
+        return await t.save();
     }
 
     async update(task) {
