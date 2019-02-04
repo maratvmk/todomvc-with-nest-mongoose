@@ -2,8 +2,9 @@ import { TaskModel } from "./task";
 
 export class TaskService {
     
-    async findAll(title?: string) {
-        if (title) {
+    async findAll(taskTitle?: string) {
+        if (taskTitle) {
+            const title = encodeURIComponent(taskTitle);
             return await TaskModel.find({title: { $regex: new RegExp(title, 'i') }}).exec();
         }
         else {
